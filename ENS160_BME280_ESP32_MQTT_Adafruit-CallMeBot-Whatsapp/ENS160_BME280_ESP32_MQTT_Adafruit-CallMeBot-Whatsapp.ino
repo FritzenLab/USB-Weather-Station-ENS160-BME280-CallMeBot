@@ -1,4 +1,7 @@
 
+// NTP time: https://randomnerdtutorials.com/esp32-date-time-ntp-client-server-arduino/
+// CallMeBot Whatsapp: https://randomnerdtutorials.com/esp32-send-messages-whatsapp/
+// Adafruit MQTT: https://fritzenlab.net/2024/10/07/mqtt-protocol-with-esp32-and-adafruit-io/
 #include <WiFi.h>
 #include "WiFiClientSecure.h"
 #include "Adafruit_MQTT.h"
