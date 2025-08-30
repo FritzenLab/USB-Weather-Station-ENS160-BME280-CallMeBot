@@ -154,12 +154,14 @@ void setup() {
   client.setCACert(adafruitio_root_ca);
 
  bme.begin(0x76, &Wire);
- while( NO_ERR != ENS160.begin() ){
-      Serial.println("Communication with device ENS160, please check connection");
-      delay(3000);
-    } 
+  while( NO_ERR != ENS160.begin() ){
+    Serial.println("Communication with device ENS160, please check connection");
+    delay(3000);
+  } 
+  temp = bme.readTemperature();
+  hum = bme.readHumidity();
   ENS160.setPWRMode(ENS160_STANDARD_MODE);
-  ENS160.setTempAndHum(/*temperature=*/25.0, /*humidity=*/50.0);
+  ENS160.setTempAndHum(/*temperature=*/temp, /*humidity=*/hum);
 
   configTime(gmtOffset_sec, daylightOffset_sec, ntpServer);
   
@@ -204,6 +206,7 @@ void loop() {
 
     temp = bme.readTemperature();
     hum = bme.readHumidity();
+    ENS160.setTempAndHum(/*temperature=*/temp, /*humidity=*/hum); // re-set ENS160's temperature and humidity for re-calibration
     float pressure = bme.readPressure() / 100.0F;
     float aqi = ENS160.getAQI();
     float tvoc = ENS160.getTVOC();
